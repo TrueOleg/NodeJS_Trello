@@ -54,7 +54,7 @@ router.post('/api/singup', async (req, res, next) => {
                 .save()
                 .then(user => {
                     const token = jwt.signToken(user.id);
-                    res.status(200).send({
+                    res.status(201).send({
                     message: 'success',
                     result: true,
                     token

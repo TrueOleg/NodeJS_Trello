@@ -21,7 +21,7 @@ router.post('/', verify, async (req, res, next) => {
           where: {user_id: userId}, raw: true
           });    
            
-        res.status(200).send({
+        res.status(201).send({
             message: 'success',
             result: true,
             boards
@@ -35,12 +35,9 @@ router.post('/', verify, async (req, res, next) => {
 router.put('/', verify, async (req, res, next) => {
     try {
         const {boardId} = req.body;
-        console.log('boardId', boardId)
         const id = parseInt(boardId.replace(/\D+/g,""));
-        console.log('id', id)
         const secretId = String(id);
         const secretHash = crypto.createHash('md5').update(secretId).digest("hex");
-        console.log('secret', secretHash)
         const userId = req._userId;
         const change = await models.Boards
                 .findOne({
@@ -51,7 +48,7 @@ router.put('/', verify, async (req, res, next) => {
                  });
           
            
-        res.status(200).send({
+        res.status(201).send({
             message: 'success',
             result: true,
             secretHash
@@ -83,7 +80,6 @@ router.get('/my', verify, async (req, res, next) => {
 router.get('/search', verify, async (req, res, next) => {
     try {        
         const hash = req.query.id;
-        console.log('hash', hash)
         const userId = req._userId;
         const board = await models.Boards.findOne({
             attributes: ['id', 'title'], 

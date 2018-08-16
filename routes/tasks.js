@@ -22,7 +22,7 @@ router.post('/', verify, async (req, res, next) => {
                 })
                 .save();  
            
-        res.status(200).send({
+        res.status(201).send({
             message: 'success',
             result: true,
             
@@ -89,7 +89,7 @@ router.put('/my', verify, async (req, res, next) => {
                     },
                     raw: true
                 });          
-        res.status(200).send({
+        res.status(201).send({
             message: 'success',
             result: true,
             backLogTasks,
