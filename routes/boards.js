@@ -108,6 +108,11 @@ router.delete('/', verify, async (req, res, next) => {
                 .then(board => {
                    return board.destroy()
                 }); 
+        let deleteTasks = await models.Tasks
+                .destroy({ 
+                    where: { board_id: boardId } 
+                });
+                
         const boards = await models.Boards.findAll({
                     attributes: ['id', 'title'], 
                     where: {user_id: userId}, raw: true
