@@ -26,10 +26,12 @@ router.post('/api/singin', async (req, res, next) => {
             token 
             });
         } else {
-            res.status(401).send({
-            message: 'Incorrect password',
-            result: false
-            });
+            // res.status(401).send({
+            // message: 'Incorrect password',
+            // result: false
+            // });
+            
+            throw new Error('Incorrect password');
         }  
            
     }
