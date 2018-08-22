@@ -59,7 +59,7 @@ router.put('/', verify, async (req, res, next) => {
     }   
 });    
 
-router.get('/my', verify, async (req, res, next) => {
+router.get('/', verify, async (req, res, next) => {
     try {        
         const userId = req._userId;
         const boards = await models.Boards.findAll({

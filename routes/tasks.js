@@ -33,7 +33,7 @@ router.post('/', verify, async (req, res, next) => {
     }   
 });    
 
-router.get('/my', verify, async (req, res, next) => {
+router.get('/', verify, async (req, res, next) => {
     try {     
         const boardId = req.query.board_id;
         const status = req.query.status;  
@@ -58,9 +58,11 @@ router.get('/my', verify, async (req, res, next) => {
     }      
 }); 
 
-router.put('/my', verify, async (req, res, next) => {
+router.put('/:taskId/board/:boardId', verify, async (req, res, next) => {
     try {
-        const {status, taskId, boardId, position} = req.body;
+        
+        const {taskId, boardId} = req.params
+        const {status, position} = req.body;
         let change = await models.Tasks
                 .findOne({ 
                     where: { id: taskId } 
@@ -102,7 +104,7 @@ router.put('/my', verify, async (req, res, next) => {
     }   
 }); 
 
-router.delete('/my', verify, async (req, res, next) => {
+router.delete('/', verify, async (req, res, next) => {
     try {
         const taskId = req.query.task_id;
         const boardId = req.query.board_id;
